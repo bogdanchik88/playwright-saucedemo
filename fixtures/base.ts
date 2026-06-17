@@ -1,10 +1,11 @@
-import { test as base, Page } from "@playwright/test"
+import { test as base } from "@playwright/test"
 import { LoginPage } from "../pages/LoginPage"
+import { MainPage } from "../pages/MainPage"
 
 
 type Fixtures = {
     loginPage: LoginPage
-    standardUserPage: Page
+    standardUserPage: MainPage
 }
 
 export const test = base.extend<Fixtures>({
@@ -14,11 +15,9 @@ export const test = base.extend<Fixtures>({
         await use(loginPage)
     },
 
-    standardUserPage: async({ page }, use) => {
-        const standardUserPage = new LoginPage(page)
-        await standardUserPage.goto()
-        await standardUserPage.login(process.env.STANDARD_USER!, process.env.PASSWORD!)
-        await use(page)
+    standardUserPage: async({ page, loginPage }, use) => {
+        await loginPage.login(process.env.STANDARD_USER!, process.env.PASSWORD!)
+        await use(new MainPage(page))
     }
 })
 
