@@ -27,4 +27,8 @@ export class LoginPage extends BasePage {
     async checkError(text: string): Promise<void>{
         await expect(this.messageError).toHaveText(text)
     }
+
+    async goto(): Promise<void>{
+        await this.navigate('/')
+    }
 }
