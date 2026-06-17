@@ -5,3 +5,7 @@ test('проверка фикстуры', async({ loginPage, page }) => {
 
     await expect(page).toHaveURL(/inventory/)
 })
+
+test('проверка что залогиненный юзер сразу на главной', async({ standardUserPage }) => {
+    await expect(standardUserPage).toHaveURL(/inventory/)
+})

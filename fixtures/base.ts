@@ -4,7 +4,7 @@ import { LoginPage } from "../pages/LoginPage"
 
 type Fixtures = {
     loginPage: LoginPage
-    StandardUserPage: Page
+    standardUserPage: Page
 }
 
 export const test = base.extend<Fixtures>({
@@ -14,10 +14,10 @@ export const test = base.extend<Fixtures>({
         await use(loginPage)
     },
 
-    StandardUserPage: async({ page }, use) => {
-        const StandardUserPage = new LoginPage(page)
-        await StandardUserPage.goto()
-        await StandardUserPage.login(process.env.STANDARD_USER!, process.env.PASSWORD!)
+    standardUserPage: async({ page }, use) => {
+        const standardUserPage = new LoginPage(page)
+        await standardUserPage.goto()
+        await standardUserPage.login(process.env.STANDARD_USER!, process.env.PASSWORD!)
         await use(page)
     }
 })
